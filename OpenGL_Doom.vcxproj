@@ -146,7 +146,11 @@
     <ClInclude Include="map.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\bottom.jpg" />
+    <Image Include="images\bottom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\sounds\Gun_Fire.ogg" />
+    <None Include="..\sounds\Gun_reload.ogg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

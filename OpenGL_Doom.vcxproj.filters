@@ -16,6 +16,9 @@
     <Filter Include="소스 파일\images">
       <UniqueIdentifier>{b9121719-fe69-43fd-8de2-addd80dc9f87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\sounds">
+      <UniqueIdentifier>{7a385e27-48d5-4d89-844d-08e8593e1e6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenGL_Doom.c">
@@ -31,8 +34,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\bottom.jpg">
+    <Image Include="images\bottom.jpg">
       <Filter>소스 파일\images</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\sounds\Gun_Fire.ogg">
+      <Filter>소스 파일\sounds</Filter>
+    </None>
+    <None Include="..\sounds\Gun_reload.ogg">
+      <Filter>소스 파일\sounds</Filter>
+    </None>
   </ItemGroup>
 </Project>

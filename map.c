@@ -19,6 +19,10 @@ void Doom_map() {
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glEnd();
 
+	//TEMP Charactor
+	glColor3f(1.0f, 1.0f, 0.0f);
+	glutSolidTeapot(0.5);
+
 
     return;
 }
