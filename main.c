@@ -48,6 +48,10 @@ GLdouble Camera_eye[3] = { 0,0,0 }, Camera_center[3] = { 0,0,-1 }, Camera_up[3] 
 //마우스 시점 이동 변수
 GLint Camera_mouse[2] = { 0,0 };
 
+GLint FullwindowX = 1600, FullwindowY = 900;
+GLfloat screen_Sensitivity_X = 10000, screen_Sensitivity_Y = 0.00000005;
+
+
 
 void MyDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -57,12 +61,16 @@ void MyDisplay() {
 		Camera_center[0], Camera_center[1], Camera_center[2], //center
 		Camera_up[0], Camera_up[1], Camera_up[2] //up
 	);
-	
+
 	glutSwapBuffers();
 }
 
 void MyReshape(int NW, int NH) {
 	GLfloat nRange = 3.0f;
+	FullwindowX = NW;
+	FullwindowY = NH;
+
+
 
 	if (NH == 0) {
 		NH = 1;
@@ -73,12 +81,17 @@ void MyReshape(int NW, int NH) {
 	glLoadIdentity();
 	if (NW <= NH) {
 		glOrtho(-nRange, nRange, -nRange * NH / NW, nRange * NH / NW, -nRange, nRange);
-	}	
+	}
 	else {
 		glOrtho(-nRange * NW / NH, nRange * NW / NH, -nRange, nRange, -nRange, nRange);
 	}
+	gluPerspective(50.0f, (GLfloat)NW / (GLfloat)NH, 1.0, 40.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	
+	
+	
 }
 
 void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
@@ -86,16 +99,16 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 	switch (KeyPressed)
 	{
 	case 'w':
-		Camera_eye[2] -= 0.01;
+		Camera_eye[2] -= 0.0001;
 		break;
 	case 'a':
-		Camera_eye[1] -= 0.01;
+		Camera_eye[1] -= 0.0001;
 		break;
 	case 's':
-		Camera_eye[2] += 0.01;
+		Camera_eye[2] += 0.0001;
 		break;
 	case 'd':
-		Camera_eye[1] += 0.01;
+		Camera_eye[1] += 0.0001;
 		break;
 
 	case 'r':
@@ -127,29 +140,36 @@ void MyMouseMove(GLint X, GLint Y) {
 
 //마우스로 시점 변환시 사용
 void MyMousePassiveMove(GLint X, GLint Y) {
-	printf("%i, %i\n", X, Y);
+	//printf("%i, %i\n", X, Y);
 
-	if (X > Camera_mouse[0]) {
-		//오른쪽으로 시점이동
-		printf("오른쪽으로 시점이동\n");
-		Camera_center[0] += 0.00005;
-	}
-	else {
-		printf("왼쪽으로 시점이동\n");
-		Camera_center[0] -= 0.00005;
-	}
-	if (Y < Camera_mouse[1]) {
-		printf("위로 시점이동\n");
-		Camera_center[1] += 0.00005;
-	}
-	else {
-		printf("아래로 시점이동\n");
-		Camera_center[1] -= 0.00005;
-	}
+	//if (X > Camera_mouse[0]) {
+	//	//오른쪽으로 시점이동
+	//	printf("오른쪽으로 시점이동\n");
+	//	Camera_center[0] += 0.00005;
+	//}
+	//else {
+	//	printf("왼쪽으로 시점이동\n");
+	//	Camera_center[0] -= 0.00005;
+	//}
+	//if (Y < Camera_mouse[1]) {
+	//	printf("위로 시점이동\n");
+	//	Camera_center[1] += 0.00005;
+	//}
+	//else {
+	//	printf("아래로 시점이동\n");
+	//	Camera_center[1] -= 0.00005;
+	//}
 
 
-	Camera_mouse[0] = X;
-	Camera_mouse[1] = Y;
+	//Camera_mouse[0] = X;
+	//Camera_mouse[1] = Y;
+
+
+	printf("%lf\n", (double)X / screen_Sensitivity_X - (double)FullwindowX / screen_Sensitivity_X / 2);
+
+	Camera_center[0] = (double)X / screen_Sensitivity_X - (double)FullwindowX / screen_Sensitivity_X / 2;
+
+
 	glutPostRedisplay();
 
 }
@@ -170,26 +190,31 @@ void MenuFunc() {
 
 }
 
-
-int main(int argc, char** argv) {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE);
+void userinit() {
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(1600, 900);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Doom");
 	glClearColor(0.0, 0.0, 0.0, 1.0);
+}
 
+
+int main(int argc, char** argv) {
+	glutInit(&argc, argv);
+	userinit();
+
+	//콜백 함수 등록
 	glutDisplayFunc(MyDisplay);
 	glutReshapeFunc(MyReshape);
 	glutKeyboardFunc(MyKeyBoard);
-	//glutSpecialFunc(MySpecial);
 	glutMouseFunc(MyMouseClick);
-	//glutMotionFunc(MyMouseMove);
 	glutPassiveMotionFunc(MyMousePassiveMove);
+	//glutSpecialFunc(MySpecial);
+	//glutMotionFunc(MyMouseMove);
 	//glutIdleFunc(MyIdle);
 	//glutTimerFunc(40, MyTimer, 1);
 	//MenuFunc();
-
 	glutMainLoop();
+
 	return 0;
 }
