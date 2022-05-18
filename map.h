@@ -1,5 +1,6 @@
-#ifndef INCLUDED_MAP
-#define INCLUDED_MAP
+#ifndef __MAP_H__
+#define __MAP_H__
+
 
 
 void Doom_map();
