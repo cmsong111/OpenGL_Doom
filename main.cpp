@@ -1,35 +1,7 @@
-﻿#ifdef _WIN32
 #include <windows.h>
 #include<glut.h>
 #include<glu.h>
 #include<gl.h>
-#ifdef _WIN64
-#include <windows.h>
-#include<glut.h>
-#include<glu.h>
-#include<gl.h>
-#endif
-#elif __APPLE__
-#include "TargetConditionals.h"
-#if TARGET_IPHONE_SIMULATOR
-#include<GLUT/glut.h>
-#elif TARGET_OS_IPHONE
-#include<GLUT/glut.h>
-#elif TARGET_OS_MAC
-#include<GLUT/glut.h>
-#else
-#   error "Unknown Apple platform"
-#endif
-#elif __linux__
-// linux
-#elif __unix__ // all unices not caught above
-// Unix`
-#elif defined(_POSIX_VERSION)
-// POSIX
-#else
-#   error "Unknown compiler"
-#endif
-
 #include "map.h"
 #include <stdio.h>
 #include <stdlib.h>
