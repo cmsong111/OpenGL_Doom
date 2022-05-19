@@ -220,6 +220,56 @@ void Doom_map() {
 	glEnd();
 
 
+	//5Wall
+	//front
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 5.0f, 1.0f);
+	glVertex3f(-7.0f, 6.0f, -7.0f);
+	glVertex3f(-7.0f, 0.0f, -7.0f);
+	glVertex3f(-6.5f, 0.0f, -7.0f);
+	glVertex3f(-6.5f, 6.0f, -7.0f);
+	glEnd();
+	//right
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 5.0f, 1.0f);
+	glVertex3f(-6.5f, 6.0f, -7.0f);
+	glVertex3f(-6.5f, 0.0f, -7.0f);
+	glVertex3f(-6.5f, 0.0f, 21.0f);
+	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glEnd();
+	//bottom
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 5.0f, 1.0f);
+	glVertex3f(-14.0f, 0.0f, 21.0f);
+	glVertex3f(-13.5f, 0.0f, 20.5f);
+	glVertex3f(21.0f, 0.0f, 20.5f);
+	glVertex3f(21.0f, 0.0f, 21.0f);
+	glEnd();
+	//back
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 5.0f, 1.0f);
+	glVertex3f(-14.0f, 6.0f, 21.0f);
+	glVertex3f(-14.0f, 0.0f, 21.0f);
+	glVertex3f(-13.5f, 0.0f, 21.0f);
+	glVertex3f(-13.5f, 6.0f, 21.0f);
+	glEnd();
+	//top
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 5.0f, 1.0f);
+	glVertex3f(-14.0f, 6.0f, 21.0f);
+	glVertex3f(-13.5f, 6.0f, 20.5f);
+	glVertex3f(21.0f, 6.0f, 20.5f);
+	glVertex3f(21.0f, 6.0f, 21.0f);
+	glEnd();
+	//left
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 5.0f, 1.0f);
+	glVertex3f(-7.0f, 6.0f, -7.0f);
+	glVertex3f(-7.0f, 0.0f, -7.0f);
+	glVertex3f(-7.0f, 0.0f, 21.0f);
+	glVertex3f(-7.0f, 6.0f, 21.0f);
+	glEnd();
+
 	//TEMP Charactor
 	glColor3f(1.0f, 1.0f, 0.0f);
 	//glutSolidTeapot(0.5);
