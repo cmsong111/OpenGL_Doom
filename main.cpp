@@ -1,19 +1,33 @@
+//Windows
 #include <windows.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+//Open GL
 #include<glut.h>
 #include<glu.h>
 #include<gl.h>
-#include "map.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+//Sound
 #pragma comment (lib, "winmm.lib")
-#include <mmsystem.h>;
-
-
-
+#include <mmsystem.h>
+//Header FIle
+#include "location.h"
+#include "map.h"
+//SoundFIlePath
 #define SOUND_FILE_GUN_FIRE "sounds/Gun_Fire.wav"
 #define SOUND_FILE_GUN_RELOAD "sounds/Gun_reload.wav"
 
+//Lookat 변수
+double Camera_up[3] = { 0,1,0 };
+
+//마우스 시점 이동 변수
+GLint Camera_mouse[2] = { 0,0 };
+
+GLint FullwindowX = 1600, FullwindowY = 900;
+GLdouble screen_Sensitivity_X = 10000, screen_Sensitivity_Y = 0.00000005;
+
+Location player(0, 4, 0);
+Location player_target(0, 4, -1);
 
 
 GLfloat pitchX, yawY; //카메라 x축, y축 회전각
@@ -30,7 +44,13 @@ void FpsView(GLfloat pitch, GLfloat yaw) {
 void MyDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	Doom_map();
-	FpsView(pitchX, yawY);
+
+	gluLookAt( // x,y,z
+		player.x, player.y, player.z, //eye
+		player_target.x, player_target.y, player_target.z, //center
+		Camera_up[0], Camera_up[1], Camera_up[2] //up
+	);
+
 	glutSwapBuffers();
 }
 
@@ -60,19 +80,25 @@ void MyReshape(int NW, int NH) {
 
 void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 	printf("%c\n", KeyPressed);
+	double movespeed = 0.1;
 	switch (KeyPressed)
 	{
 	case 'w':
-		glTranslated(0.0, 0.0, 0.1);
+		player.z -= movespeed;
+		player_target.z -= movespeed;
 		break;
 	case 'a':
-		glTranslated(0.1, 0.0, 0.0);
+		player.x -= movespeed;
+		player_target.x -= movespeed;
 		break;
 	case 's':
-		glTranslated(0.0, 0.0, -0.1);
+		player.z += movespeed;
+		player_target.z += movespeed;
+
 		break;
 	case 'd':
-		glTranslated(-0.1, 0.0, 0.0);
+		player.x += movespeed;
+		player_target.x += movespeed;
 		break;
 
 	case 'r':
@@ -106,8 +132,6 @@ void MyMouseMove(GLint X, GLint Y) {
 void MyMousePassiveMove(GLint X, GLint Y) {
 	printf("%i, %i\n", X, Y);
 
-
-
 	if (FirstMouseMove) {
 		CurrentX = X;
 		CurrentY = Y;
@@ -121,8 +145,7 @@ void MyMousePassiveMove(GLint X, GLint Y) {
 	else if (yawY <= -60)
 		yawY = -60;
 
-	CurrentX = X;
-	CurrentY = Y;
+
 
 	glutPostRedisplay();
 
