@@ -20,6 +20,8 @@
 //SoundFIlePath
 #define SOUND_FILE_GUN_FIRE "sounds/Gun_Fire.wav"
 #define SOUND_FILE_GUN_RELOAD "sounds/Gun_reload.wav"
+#define SOUND_FILE_GUN_NON "sounds/Gun_nonbullet.wav"
+
 #define PI 3.1415
 
 //Lookat 변수
@@ -31,6 +33,7 @@ GLint Camera_mouse[2] = { 0,0 };
 
 GLint FullwindowX = 1600, FullwindowY = 900;
 GLdouble screen_Sensitivity_X = 10000, screen_Sensitivity_Y = 0.00000005;
+GLdouble sitdown = 4.0;
 
 
 Location player(0, 4, 0);
@@ -42,9 +45,11 @@ GLfloat moveX = 0.0f, moveZ = 0.0f; // X,Z축 시점 이동변화량
 GLfloat mX = 0.0f, mZ = 0.0f; // X,Z축 총 이동량
 GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
 
+int bullet = 20;
+
 
 void FpsView(GLfloat yaw, GLfloat pitch) {
-	gluLookAt(0, 4, 0, 0, 4, -1, 0, 1, 0);
+	gluLookAt(0, sitdown, 0, 0, sitdown, -1, 0, 1, 0);
 	glRotatef(yaw, 0.0, 1.0, 0.0);
 	glRotatef(pitch, 1.0, 0.0, 0.0);
 }
@@ -105,6 +110,7 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 	case 'r':
 		printf("GUN_RELOAD\n");
 		PlaySound(TEXT(SOUND_FILE_GUN_RELOAD), NULL, SND_ASYNC);
+		bullet = 20;
 		break;
 
 	default:
@@ -114,13 +120,30 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 }
 
 void MySpecial(int key, int X, int Y) {
-
+	printf("%d", key);
+	if (key == 112) {
+		if (sitdown == 4) {
+			sitdown = 2;
+		}
+		else {
+			sitdown = 4;
+		}
+	}
+	glutPostRedisplay();
 }
 
 void MyMouseClick(GLint Button, GLint State, GLint X, GLint Y) {
 	if (Button == GLUT_LEFT_BUTTON && State == GLUT_DOWN) {
-		printf("GUN_FIRE\n");
-		PlaySound(TEXT(SOUND_FILE_GUN_FIRE), NULL, SND_ASYNC);
+		if (bullet >= 0) {
+			printf("GUN_FIRE\n");
+			PlaySound(TEXT(SOUND_FILE_GUN_FIRE), NULL, SND_ASYNC);
+			bullet--;
+		}
+		if (bullet < 0) {
+			printf("bullet out\n");
+			PlaySound(TEXT(SOUND_FILE_GUN_NON), NULL, SND_ASYNC);
+		}
+		
 	}
 }
 
@@ -170,7 +193,7 @@ int main(int argc, char** argv) {
 	glutDisplayFunc(MyDisplay);
 	glutReshapeFunc(MyReshape);
 	glutKeyboardFunc(MyKeyBoard);
-	//glutSpecialFunc(MySpecial);
+	glutSpecialFunc(MySpecial);
 	glutMouseFunc(MyMouseClick);
 	//glutMotionFunc(MyMouseMove);
 	glutPassiveMotionFunc(MyMousePassiveMove);

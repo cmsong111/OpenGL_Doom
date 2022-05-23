@@ -4,7 +4,7 @@
 
 
 void Doom_map();
-//void loadTexture();
+void loadTexture();
 
 
 #endif
