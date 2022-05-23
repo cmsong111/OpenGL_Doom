@@ -44,7 +44,7 @@ GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
 
 
 void FpsView(GLfloat yaw, GLfloat pitch) {
-	gluLookAt(0, 0, 0, 0, 0, -1, 0, 1, 0);
+	gluLookAt(0, 4, 0, 0, 4, -1, 0, 1, 0);
 	glRotatef(yaw, 0.0, 1.0, 0.0);
 	glRotatef(pitch, 1.0, 0.0, 0.0);
 }
