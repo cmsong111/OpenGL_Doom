@@ -1,21 +1,40 @@
+//Windows
 #include <windows.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+//Open GL
 #include<glut.h>
 #include<glu.h>
 #include<gl.h>
-#include "map.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
+
+//Sound
 #pragma comment (lib, "winmm.lib")
-#include <mmsystem.h>;
+#include <mmsystem.h>
 
+//Header FIle
+#include "location.h"
+#include "map.h"
 
-
+//SoundFIlePath
 #define SOUND_FILE_GUN_FIRE "sounds/Gun_Fire.wav"
 #define SOUND_FILE_GUN_RELOAD "sounds/Gun_reload.wav"
 #define PI 3.1415
 
+//Lookat 변수
+double Camera_up[3] = { 0,1,0 };
+
+//마우스 시점 이동 변수
+GLint Camera_mouse[2] = { 0,0 };
+
+
+GLint FullwindowX = 1600, FullwindowY = 900;
+GLdouble screen_Sensitivity_X = 10000, screen_Sensitivity_Y = 0.00000005;
+
+
+Location player(0, 4, 0);
+Location player_target(0, 4, -1);
 
 GLfloat yawX, pitchY; //카메라 y축, x축 기준  회전각 변화량
 GLfloat CurrentX = 0.0f, CurrentY = 0.0f; //현재 마우스 좌표
@@ -32,13 +51,11 @@ void FpsView(GLfloat yaw, GLfloat pitch) {
 
 void MyDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT);
-
 	glPushMatrix();
 	FpsView(rotX, rotY);
 	glTranslated(mX, 0, mZ);
 	Doom_map();
 	glPopMatrix();
-
 	glutSwapBuffers();
 }
 
@@ -53,6 +70,7 @@ void MyReshape(int NW, int NH) {
 
 void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 	printf("%c\n", KeyPressed);
+	double movespeed = 0.1;
 	switch (KeyPressed)
 	{
 	case 'w':
@@ -89,7 +107,6 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 		PlaySound(TEXT(SOUND_FILE_GUN_RELOAD), NULL, SND_ASYNC);
 		break;
 
-
 	default:
 		break;
 	}
@@ -114,13 +131,13 @@ void MyMouseMove(GLint X, GLint Y) {
 //마우스로 시점 변환시 사용
 void MyMousePassiveMove(GLint X, GLint Y) {
 	printf("%i, %i\n", X, Y);
-
 	yawX = X - CurrentX;
 	//pitchY = Y-CurrentY;
 	rotX += yawX * 0.5;
 	//rotY += pitchY * 0.5;
 	CurrentX = X;
 	//CurrentY = Y;
+
 	glutPostRedisplay();
 }
 
