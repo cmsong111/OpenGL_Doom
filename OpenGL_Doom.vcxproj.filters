@@ -30,14 +30,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bottom.jpg">
-      <Filter>리소스 파일\images</Filter>
+      <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\sounds\Gun_Fire.ogg">
-      <Filter>리소스 파일\sounds</Filter>
-    </None>
-    <None Include="..\sounds\Gun_reload.ogg">
       <Filter>리소스 파일\sounds</Filter>
     </None>
   </ItemGroup>
@@ -48,5 +45,13 @@
     <ClInclude Include="location.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="sounds\Gun_nonbullet.wav">
+      <Filter>리소스 파일\sounds</Filter>
+    </Media>
+    <Media Include="sounds\Gun_reload.wav">
+      <Filter>리소스 파일\sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>
