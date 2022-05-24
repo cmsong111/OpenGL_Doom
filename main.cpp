@@ -47,6 +47,9 @@ GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
 
 int bullet = 20;
 
+//함수 원형 선언
+void JumpTimer(int value);
+
 
 void FpsView(GLfloat yaw, GLfloat pitch) {
 	gluLookAt(0, sitdown, 0, 0, sitdown, -1, 0, 1, 0);
@@ -68,13 +71,13 @@ void MyReshape(int NW, int NH) {
 	glViewport(0, 0, NW, NH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0f, NW / NH, 1, 22);
+	gluPerspective(60.0f, NW / NH, 1, 42);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
 void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
-	printf("%c\n", KeyPressed);
+	printf("%d\n", KeyPressed);
 	double movespeed = 0.1;
 	switch (KeyPressed)
 	{
@@ -112,6 +115,9 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 		PlaySound(TEXT(SOUND_FILE_GUN_RELOAD), NULL, SND_ASYNC);
 		bullet = 20;
 		break;
+	case 32:
+		glutTimerFunc(10, JumpTimer, 1);
+		break;
 
 	default:
 		break;
@@ -121,7 +127,7 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 
 void MySpecial(int key, int X, int Y) {
 	printf("%d", key);
-	if (key == 112) {
+	if (key == 114) {
 		if (sitdown == 4) {
 			sitdown = 2;
 		}
@@ -178,6 +184,22 @@ void MenuProc(int entryID) {
 
 void MenuFunc() {
 
+}
+
+void JumpTimer(int value) {
+	printf("점프 실행중, value = %d\n", value);
+	if (value == 1 && sitdown <= 5.4) {
+		sitdown += 0.1;
+		glutTimerFunc(10, JumpTimer, 1);
+	}
+	else if (value == 1 && sitdown >= 5.4) {
+		glutTimerFunc(10, JumpTimer, -1);
+	}
+	else if (value == -1 && sitdown >= 4) {
+		sitdown -= 0.1;
+		glutTimerFunc(10, JumpTimer, -1);
+	}	
+	glutPostRedisplay();
 }
 
 
