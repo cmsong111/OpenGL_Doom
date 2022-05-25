@@ -14,7 +14,7 @@
 #include <mmsystem.h>
 
 //Header FIle
-#include "location.h"
+#include "bot.h"
 #include "map.h"
 
 //SoundFIlePath
@@ -24,20 +24,9 @@
 
 #define PI 3.1415
 
-//Lookat 변수
-double Camera_up[3] = { 0,1,0 };
 
-//마우스 시점 이동 변수
-GLint Camera_mouse[2] = { 0,0 };
-
-
-GLint FullwindowX = 1600, FullwindowY = 900;
-GLdouble screen_Sensitivity_X = 10000, screen_Sensitivity_Y = 0.00000005;
 GLdouble sitdown = 4.0;
 
-
-Location player(0, 4, 0);
-Location player_target(0, 4, -1);
 
 GLfloat yawX, pitchY; //카메라 y축, x축 기준  회전각 변화량
 GLfloat CurrentX = 0.0f, CurrentY = 0.0f; //현재 마우스 좌표
@@ -58,7 +47,9 @@ void FpsView(GLfloat yaw, GLfloat pitch) {
 }
 
 void MyDisplay() {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+
 	glPushMatrix();
 	FpsView(rotX, rotY);
 	glTranslated(mX, 0, mZ);
@@ -71,7 +62,7 @@ void MyReshape(int NW, int NH) {
 	glViewport(0, 0, NW, NH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0f, NW / NH, 1, 42);
+	gluPerspective(60.0f, NW / NH, 1, 50);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }

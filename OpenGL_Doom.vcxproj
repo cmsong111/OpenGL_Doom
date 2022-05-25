@@ -139,11 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bot.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="location.h" />
+    <ClInclude Include="bot.h" />
     <ClInclude Include="map.h" />
   </ItemGroup>
   <ItemGroup>
