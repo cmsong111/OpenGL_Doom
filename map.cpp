@@ -347,8 +347,8 @@ void Doom_map() {
 	glVertex3f(7.0f, 6.0f, 7.0f);
 	//left
 	glColor3f(0.8f, 0.0f, 0.5f);
-	glVertex3f(6.5f, 6.0f, -7.0f);
-	glVertex3f(6.5f, 0.0f, -7.0f);
+	glVertex3f(-6.5f, 6.0f, 7.0f);
+	glVertex3f(-6.5f, 0.0f, 7.0f);
 	glVertex3f(6.5f, 0.0f, 7.0f);
 	glVertex3f(6.5f, 6.0f, 7.0f);
 	glEnd();

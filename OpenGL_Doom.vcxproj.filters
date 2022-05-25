@@ -27,6 +27,9 @@
     <ClCompile Include="map.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="bot.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bottom.jpg">
@@ -42,7 +45,7 @@
     <ClInclude Include="map.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="location.h">
+    <ClInclude Include="bot.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
