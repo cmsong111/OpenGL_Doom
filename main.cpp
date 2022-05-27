@@ -153,7 +153,7 @@ void MyMousePassiveMove(GLint X, GLint Y) {
 	printf("%i, %i\n", X, Y);
 	yawX = X - CurrentX;
 	//pitchY = Y-CurrentY;
-	rotX += yawX * 0.5;
+	rotX += yawX * 0.7;
 	//rotY += pitchY * 0.5;
 	CurrentX = X;
 	//CurrentY = Y;
