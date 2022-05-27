@@ -68,36 +68,45 @@ void Doom_map() {
 	glVertex3f(-21.0f, 0.0f, -21.0f);
 	glVertex3f(-20.5f, 0.0f, -21.0f);
 	glVertex3f(-20.5f, 6.0f, -21.0f);
-
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
 	glVertex3f(-20.5f, 6.0f, 21.0f);
 	glVertex3f(-20.5f, 0.0f, 21.0f);
 	glVertex3f(-20.5f, 0.0f, -21.0f);
 	glVertex3f(-20.5f, 6.0f, -21.0f);
+	glEnd();
 
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
 	glVertex3f(-20.5f, 0.0f, 21.0f);
 	glVertex3f(-20.5f, 0.0f, -21.0f);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
 	glVertex3f(-21.0f, 0.0f, 21.0f);
+	glEnd();
 
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
 	glVertex3f(-21.0f, 6.0f, 21.0f);
 	glVertex3f(-21.0f, 0.0f, 21.0f);
 	glVertex3f(-20.5f, 0.0f, 21.0f);
 	glVertex3f(-20.5f, 6.0f, 21.0f);
+	glEnd();
 
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
 	glVertex3f(-20.5f, 6.0f, 21.0f);
 	glVertex3f(-20.5f, 6.0f, -21.0f);
 	glVertex3f(-21.0f, 6.0f, -21.0f);
 	glVertex3f(-21.0f, 6.0f, 21.0f);
+	glEnd();
 
 	//left
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
 	glVertex3f(-21.0f, 6.0f, 21.0f);
 	glVertex3f(-21.0f, 0.0f, 21.0f);
@@ -113,31 +122,41 @@ void Doom_map() {
 	glVertex3f(-21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -20.5f);
 	glVertex3f(21.0f, 6.0f, -20.5f);
+	glEnd();
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glVertex3f(-21.0f, 0.0f, -20.5f);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -20.5f);
+	glEnd();
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glVertex3f(-21.0f, 6.0f, -20.5f);
 	glVertex3f(-21.0f, 0.0f, -20.5f);
 	glVertex3f(21.0f, 0.0f, -20.5f);
 	glVertex3f(21.0f, 6.0f, -20.5f);
+	glEnd();
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glVertex3f(-21.0f, 6.0f, -20.5f);
 	glVertex3f(-21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, -20.5f);
+	glEnd();
 	//left
+	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glVertex3f(-21.0f, 6.0f, -21.0f);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
@@ -153,31 +172,41 @@ void Doom_map() {
 	glVertex3f(20.5f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 1.0f, 1.0f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glVertex3f(21.0f, 6.0f, 21.0f);
+	glEnd();
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 1.0f, 1.0f);
 	glVertex3f(20.5f, 0.0f, 21.0f);
 	glVertex3f(20.5f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, 21.0f);
+	glEnd();
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 1.0f, 1.0f);
 	glVertex3f(20.5f, 6.0f, 21.0f);
 	glVertex3f(20.5f, 0.0f, 21.0f);
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glVertex3f(21.0f, 6.0f, 21.0f);
+	glEnd();
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 1.0f, 1.0f);
 	glVertex3f(20.5f, 6.0f, 21.0f);
 	glVertex3f(20.5f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, 21.0f);
+	glEnd();
 	//left
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 1.0f, 1.0f);
 	glVertex3f(20.5f, 6.0f, -21.0f);
 	glVertex3f(20.5f, 0.0f, -21.0f);
@@ -194,31 +223,41 @@ void Doom_map() {
 	glVertex3f(-7.0f, 0.0f, 20.5f);
 	glVertex3f(21.0f, 0.0f, 20.5f);
 	glVertex3f(21.0f, 6.0f, 20.5f);
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glVertex3f(21.0, 6.0f, 20.5f);
 	glVertex3f(21.0, 0.0f, 20.5f);
 	glVertex3f(21.0, 0.0f, 21.0f);
 	glVertex3f(21.0, 6.0f, 21.0f);
+	glEnd();
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
 	glVertex3f(-7.0f, 0.0f, 20.5f);
 	glVertex3f(21.0f, 0.0f, 20.5f);
 	glVertex3f(21.0f, 0.0f, 21.0f);
+	glEnd();
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, 21.0f);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glVertex3f(21.0f, 6.0f, 21.0f);
+	glEnd();
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, 21.0f);
 	glVertex3f(-7.0f, 6.0f, 20.5f);
 	glVertex3f(21.0f, 6.0f, 20.5f);
 	glVertex3f(21.0f, 6.0f, 21.0f);
+	glEnd();
 	//left
+	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glVertex3f(-7.0, 6.0f, 20.5f);
 	glVertex3f(-7.0, 0.0f, 20.5f);
@@ -235,33 +274,43 @@ void Doom_map() {
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 6.0f, -7.0f);
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.5f);
 	glVertex3f(-6.5f, 6.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
 	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glEnd();
 	
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
+	glEnd();
 	
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, 21.0f);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
 	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glEnd();
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, 21.0f);
 	glVertex3f(-7.0f, 6.0f, -7.0f);
 	glVertex3f(-6.5f, 6.0f, -7.0f);
 	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glEnd();
 	//left
+	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, 21.0f);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
@@ -277,33 +326,43 @@ void Doom_map() {
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, -7.0f);
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
 	glVertex3f(7.0f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -6.5f);
 	glVertex3f(7.0f, 6.0f, -6.5f);
+	glEnd();
 	
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 0.0f, -6.5f);
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -6.5f);
+	glEnd();
 	
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, -6.5f);
 	glVertex3f(-7.0f, 0.0f, -6.5f);
 	glVertex3f(7.0f, 0.0f, -6.5f);
 	glVertex3f(7.0f, 6.0f, -6.5f);
+	glEnd();
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, -6.5f);
 	glVertex3f(-7.0f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, -6.5f);
+	glEnd();
 	//left
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
 	glVertex3f(-7.0f, 6.0f, -7.0f);
 	glVertex3f(-7.0f, 0.0f, -7.0f);
@@ -319,39 +378,49 @@ void Doom_map() {
 	glVertex3f(6.5f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, -7.0f);
+	glEnd();
 	//right
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
 	glVertex3f(7.0f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, 7.0f);
 	glVertex3f(7.0f, 6.0f, 7.0f);
+	glEnd();
 	
 	//bottom
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
 	glVertex3f(6.5f, 0.0f, 7.0f);
 	glVertex3f(6.5f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, 7.0f);
+	glEnd();
 	
 	//back
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
 	glVertex3f(6.5f, 6.0f, 7.0f);
 	glVertex3f(6.5f, 0.0f, 7.0f);
 	glVertex3f(7.0f, 0.0f, 7.0f);
 	glVertex3f(7.0f, 6.0f, 7.0f);
+	glEnd();
 	//top
+	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
 	glVertex3f(6.5f, 6.0f, 7.0f);
 	glVertex3f(6.5f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, 7.0f);
+	glEnd();
 	//left
+	/*glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
 	glVertex3f(-6.5f, 6.0f, 7.0f);
 	glVertex3f(-6.5f, 0.0f, 7.0f);
 	glVertex3f(6.5f, 0.0f, 7.0f);
 	glVertex3f(6.5f, 6.0f, 7.0f);
-	glEnd();
+	glEnd();*/
 
 	//TEMP Charactor
 	glColor3f(1.0f, 1.0f, 0.0f);
