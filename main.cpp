@@ -33,11 +33,11 @@ GLfloat CurrentX = 0.0f, CurrentY = 0.0f; //현재 마우스 좌표
 GLfloat moveX = 0.0f, moveZ = 0.0f; // X,Z축 시점 이동변화량
 GLfloat mX = 0.0f, mZ = 0.0f; // X,Z축 총 이동량
 GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
-
 int bullet = 20;
 
 //함수 원형 선언
 void JumpTimer(int value);
+void init();
 
 
 void FpsView(GLfloat yaw, GLfloat pitch) {
@@ -59,6 +59,7 @@ void MyDisplay() {
 }
 
 void MyReshape(int NW, int NH) {
+
 	glViewport(0, 0, NW, NH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -153,7 +154,7 @@ void MyMousePassiveMove(GLint X, GLint Y) {
 	printf("%i, %i\n", X, Y);
 	yawX = X - CurrentX;
 	//pitchY = Y-CurrentY;
-	rotX += yawX * 0.5;
+	rotX += yawX * 0.7;
 	//rotY += pitchY * 0.5;
 	CurrentX = X;
 	//CurrentY = Y;
@@ -202,7 +203,7 @@ int main(int argc, char** argv) {
 	glutCreateWindow("Doom");
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
-
+	init();
 	glutDisplayFunc(MyDisplay);
 	glutReshapeFunc(MyReshape);
 	glutKeyboardFunc(MyKeyBoard);

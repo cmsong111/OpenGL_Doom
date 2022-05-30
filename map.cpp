@@ -6,40 +6,46 @@
 #include <windows.h>
 #include <stdlib.h>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
-//GLuint g_textureID = 1;
-//
-//struct Vertex
-//{
-//	float tu, tv;
-//	float x, y, z;
-//};
-//
-//Vertex g_quadVertices[] = {
-//	{0.0f,0.0f,-1.0f,-1.0f,0.0f},
-//	{1.0f,0.0f,1.0f,-1.0f,0.0f},
-//	{1.0f,1.0f,1.0f,1.0f,0.0f},
-//	{0.0f,1.0f,-1.0f,1.0f,0.0f}
-//};
-//
-//void loadTexture() {
-//	AUX_RGBImageRec* pBottomImage = auxDIBImageLoad(L"images/bottom.bmp");
-//
-//	if (pBottomImage != NULL) {
-//		glGenTextures(1, &g_textureID);
-//		glBindTexture(GL_TEXTURE_2D, g_textureID);
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//		glTexImage2D(GL_TEXTURE_2D, 0, 3, pBottomImage->sizeX,
-//			pBottomImage->sizeY, 0, GL_RGB,
-//			GL_UNSIGNED_BYTE, pBottomImage->data);
-//	}
-//	if (pBottomImage) {
-//		if (pBottomImage->data)
-//			free(pBottomImage->data);
-//		free(pBottomImage);
-//	}
-//}
+GLuint g_textureID = 1;
+int width, height;
+
+
+unsigned char* LoadMeshFromFile(const char* texFile)
+{
+	GLuint texture;
+	glGenTextures(1, &texture);
+	FILE* fp = NULL;
+	if (fopen_s(&fp, texFile, "rb")) {
+		printf("ERROR : No %s. \n fail to bind %d\n", texFile, texture);
+		return (unsigned char*)false;
+	}
+	int channel;
+	unsigned char* image = stbi_load_from_file(fp, &width, &height, &channel, 4);
+	fclose(fp);
+	return image;
+}
+
+// texture ¼³Á¤
+void init()
+{
+	GLuint texID;
+
+	unsigned char* bitmap;
+	bitmap = LoadMeshFromFile((char*)"images/bottom.bmp");
+	glEnable(GL_TEXTURE_2D);
+	glGenTextures(1, &texID);
+	glBindTexture(GL_TEXTURE_2D, texID);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmap);
+
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	free(bitmap);
+}
 
 void Doom_map() {
 	//Bottom
@@ -361,5 +367,3 @@ void Doom_map() {
 
 	return;
 }
-
-
