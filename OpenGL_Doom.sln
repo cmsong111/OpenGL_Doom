@@ -26,10 +26,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-<<<<<<< Updated upstream
 		SolutionGuid = {39684A70-9A89-40D7-BFDD-E46049F0748B}
-=======
-		SolutionGuid = {3C663737-15C9-4B5E-8F93-246A30ECBAA9}
->>>>>>> Stashed changes
+
 	EndGlobalSection
 EndGlobal
