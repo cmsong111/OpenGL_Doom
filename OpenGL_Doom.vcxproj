@@ -146,8 +146,10 @@
   <ItemGroup>
     <ClInclude Include="bot.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\bottom.bmp" />
     <Image Include="images\bottom.jpg" />
   </ItemGroup>
   <ItemGroup>
