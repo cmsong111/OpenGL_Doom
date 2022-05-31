@@ -38,6 +38,27 @@
     <Image Include="images\bottom.bmp">
       <Filter>리소스 파일\images</Filter>
     </Image>
+    <Image Include="images\creature_3.png">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_4.jpg">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_1.png">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_2.png">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\brown_wall.jpg">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\black_wall.jpg">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\green_wall.jpg">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\sounds\Gun_Fire.ogg">

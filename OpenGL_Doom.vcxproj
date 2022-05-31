@@ -149,8 +149,15 @@
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\black_wall.jpg" />
     <Image Include="images\bottom.bmp" />
     <Image Include="images\bottom.jpg" />
+    <Image Include="images\brown_wall.jpg" />
+    <Image Include="images\creature_1.png" />
+    <Image Include="images\creature_2.png" />
+    <Image Include="images\creature_3.png" />
+    <Image Include="images\creature_4.jpg" />
+    <Image Include="images\green_wall.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\sounds\Gun_Fire.ogg" />
