@@ -45,11 +45,11 @@ void lightburb() {
 	GLfloat material_specular[] = { 1.0, 0.4, 0.4, 1.0 };
 	GLfloat material_shininess[] = { 127.0 };
 	GLfloat material_emisson[] = { 0.8,0.2,0.2,1.0 };
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse);
+	/*glMaterialfv(GL_FRONT, GL_DIFFUSE, material_diffuse);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, material_specular);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, material_ambient);
 	glMaterialfv(GL_FRONT, GL_SHININESS, material_shininess);
-	glMaterialfv(GL_FRONT, GL_EMISSION, material_emisson);
+	glMaterialfv(GL_FRONT, GL_EMISSION, material_emisson);*/
 
 	glPushMatrix();
 	glTranslated(0.0, 3.9, 0.0);
@@ -248,9 +248,9 @@ void InitIight() {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, Light0_ambient);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, Light0_diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, Light0_specular);
+	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.9);
 
-
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Global_ambient_Color);
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Global_ambient_Color);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 	
 	
