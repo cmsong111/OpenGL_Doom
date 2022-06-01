@@ -42,39 +42,44 @@ void init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmap);
 
+
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	free(bitmap);
 }
 
 void Doom_map() {
+	
+	
+		
 	//Bottom
 	glBegin(GL_POLYGON);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glTexCoord2d(0.0, 1.0);
-	glVertex3f(-21.0f, 0.0f, 21.0f);
-
-	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-21.0f, 0.0f, -21.0f);
-
-	glTexCoord2d(1.0, 0.0);
+	glTexCoord2d(1.0, 1.0);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 
-	glTexCoord2d(1.0, 1.0);
+	glTexCoord2d(0.0, 1.0);
+	glVertex3f(-21.0f, 0.0f, -21.0f);
+
+	glTexCoord2d(0.0, 0.0);
+	glVertex3f(-21.0f, 0.0f, 21.0f);
+
+	glTexCoord2d(1.0, 0.0);
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glEnd();
 
 	//TOPWALL
-	glBegin(GL_POLYGON);
+	/*glBegin(GL_POLYGON);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glVertex3f(-21.0f, 6.0f, 21.0f);
 	glVertex3f(-21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, -21.0f);
 	glVertex3f(21.0f, 6.0f, 21.0f);
-	glEnd();
+	glEnd();*/
 
 	//1Wall
 	//front
+	glDisable(GL_LIGHTING);
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
 	glVertex3f(-21.0f, 6.0f, -21.0f);
@@ -232,10 +237,10 @@ void Doom_map() {
 	//front
 	glBegin(GL_QUADS);
 	glColor3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(21.0f, 6.0f, 20.5f);
 	glVertex3f(-7.0f, 6.0f, 20.5f);
 	glVertex3f(-7.0f, 0.0f, 20.5f);
 	glVertex3f(21.0f, 0.0f, 20.5f);
-	glVertex3f(21.0f, 6.0f, 20.5f);
 	glEnd();
 	//right
 	glBegin(GL_QUADS);
@@ -292,9 +297,9 @@ void Doom_map() {
 	glBegin(GL_QUADS);
 	glColor3f(0.0f, 1.0f, 0.5f);
 	glVertex3f(-6.5f, 6.0f, -7.0f);
-	glVertex3f(-6.5f, 0.0f, -7.0f);
+	glVertex3f(-6.5f, 6.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
-	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glVertex3f(-6.5f, 0.0f, 21.0f);
 	glEnd();
 	
 	//bottom
@@ -426,6 +431,8 @@ void Doom_map() {
 	glVertex3f(7.0f, 6.0f, -7.0f);
 	glVertex3f(7.0f, 6.0f, 7.0f);
 	glEnd();
+	glEnable(GL_LIGHTING);
+	
 	//left
 	/*glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
@@ -441,6 +448,6 @@ void Doom_map() {
 	glutWireTeapot(0.5);
 
 
-	return;
+	
 }
 
