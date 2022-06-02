@@ -172,7 +172,7 @@ void MyMousePassiveMove(GLint X, GLint Y) {
 }
 
 void MyIdle() {
-
+	
 }
 
 void MyTimer(int Value) {
