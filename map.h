@@ -5,6 +5,7 @@
 
 void Doom_map();
 void loadTexture();
-
+void MyLightInit();
+void Doom_mob(float angle);
 
 #endif
