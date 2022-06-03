@@ -58,6 +58,7 @@ void Doom_map() {
 	//Bottom
 	glBindTexture(GL_TEXTURE_2D, texID[0]);
 	glBegin(GL_POLYGON);
+	glNormal3f(0.0, 1.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(21.0f, 0.0f, -21.0f);
@@ -154,6 +155,7 @@ void Doom_map() {
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
 	//front
+	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glTexCoord2d(0.0, 0.0);
 	glVertex3f(-21.0f, 6.0f, -21.0f);
@@ -227,6 +229,7 @@ void Doom_map() {
 	//right
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(1.0f, 1.0f, 0.5f);
 
 	glTexCoord2d(0.0, 0.0);
@@ -288,6 +291,7 @@ void Doom_map() {
 	//front
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(0.0, 0.0, -1.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 	glTexCoord2d(0.0, 0.0);
 	glVertex3f(21.0f, 6.0f, 20.5f);
@@ -364,6 +368,7 @@ void Doom_map() {
 	//right
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
@@ -408,6 +413,7 @@ void Doom_map() {
 	//left
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
@@ -427,6 +433,7 @@ void Doom_map() {
 	//front
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(0.0, 0.0, -1.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
@@ -462,6 +469,7 @@ void Doom_map() {
 	//back
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(0.0, 0.0, 1.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
@@ -505,6 +513,7 @@ void Doom_map() {
 	//right
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
@@ -523,6 +532,7 @@ void Doom_map() {
 	//bottom
 	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_QUADS);
+	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);

@@ -235,7 +235,7 @@ void flashlight2() {
 }
 void InitIight() {
 	GLfloat Global_ambient_Color[] = { 1.0,0.8,0.8,1.0 };
-	GLfloat Light0_pos[] = { 0.0,3.9,0.0,1.0};
+	GLfloat Light0_pos[] = { 0.0,5.9,0.0,1.0};
 	GLfloat Light0_ambient[] = {0.2, 0.2, 0.2, 1.0};
 	GLfloat Light0_diffuse[] = { 0.7, 0.1, 0.1, 1.0 };
 	GLfloat Light0_specular[] = { 1.0, 0.2, 0.2, 1.0 };
