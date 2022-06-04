@@ -188,22 +188,22 @@ void statusTimer(int Value) {
 
 	system("cls");
 	printf("====Key Manual====\n");
-	printf("move key = wasd\tangle = mouse move\n");
-	printf("sitdown : ctrl\tjump : spacebar\n");
-	printf("shot gun : mouse left click\treload : r\n");
+	printf("move key = wasd\n");
+	printf("angle = mouse move\n");
+	printf("sitdown : ctrl\n");
+	printf("jump : spacebar\n");
+	printf("shot gun : mouse left click\n");
+	printf("reload : r\n");
 	printf("\n====Status====\n");
 	printf("bullet : %d\n", bullet);
+	printf("health : 100\n");
 
 	if (bullet < 0) {
 		printf("\n====Warning====\n");
 		printf("You need reload\n");
 	}
-
 	printf("\n====Timer====\n");
-	printf("%d min %d sec", Value / 1000 / 60, Value / 1000);
-
-	printf("\n====== loacte ======\n");
-	printf("x = %f, z = %f\n", mX, mZ);
+	printf("%d min %d sec", Value / 1000 / 60, Value / 1000 % 60);
 
 	glutTimerFunc(500, statusTimer, Value + 500);
 }
