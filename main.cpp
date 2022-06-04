@@ -14,7 +14,6 @@
 #include <mmsystem.h>
 
 //Header FIle
-#include "bot.h"
 #include "map.h"
 
 //SoundFIlePath
@@ -34,6 +33,7 @@ GLfloat moveX = 0.0f, moveZ = 0.0f; // X,Z축 시점 이동변화량
 GLfloat mX = 0.0f, mZ = 0.0f; // X,Z축 총 이동량q
 GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
 int bullet = 20;
+float angle = 0;
 
 //함수 원형 선언
 void JumpTimer(int value);
@@ -52,6 +52,10 @@ void MyDisplay() {
 	FpsView(rotX, rotY);
 	glTranslated(mX, 0, mZ);
 	Doom_map();
+	makebot(angle, 2, 4, -5.5, 19, 5);
+	makebot(angle, 1, 5, 19, 0, 6);
+	makebot(angle, 1, 5, -19, -19, 7);
+	makebot(angle, 2.5, 4, 19, 19, 8);
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -164,8 +168,10 @@ void MyIdle() {
 
 }
 
-void MyTimer(int Value) {
-
+void AngleTimer(int Value) {
+	angle = rand() % 360;
+	glutPostRedisplay();
+	glutTimerFunc(1600, AngleTimer, 1);
 }
 
 void MenuProc(int entryID) {
@@ -173,7 +179,7 @@ void MenuProc(int entryID) {
 }
 
 void MenuFunc() {
-
+	
 }
 
 void JumpTimer(int value) {
@@ -264,7 +270,7 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(1600, 900);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Doom");
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
 	InitIight();
 
 	init();
@@ -276,7 +282,7 @@ int main(int argc, char** argv) {
 	//glutMotionFunc(MyMouseMove);
 	glutPassiveMotionFunc(MyMousePassiveMove);
 	//glutIdleFunc(MyIdle);
-	//glutTimerFunc(40, MyTimer, 1);
+	glutTimerFunc(1600, AngleTimer, 1);
 	//MenuFunc();
 
 	glutMainLoop();

@@ -139,18 +139,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bot.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bot.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="images\black_wall.bmp" />
     <Image Include="images\bottom.bmp" />
     <Image Include="images\bottom.jpg" />
+    <Image Include="images\brown_wall.bmp" />
+    <Image Include="images\creature_1.bmp" />
+    <Image Include="images\creature_2.bmp" />
+    <Image Include="images\creature_3.png" />
+    <Image Include="images\creature_4.jpg" />
+    <Image Include="images\green_wall.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\sounds\Gun_Fire.ogg" />

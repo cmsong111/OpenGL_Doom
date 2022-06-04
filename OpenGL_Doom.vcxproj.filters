@@ -27,15 +27,33 @@
     <ClCompile Include="map.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="bot.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bottom.jpg">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="images\bottom.bmp">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_2.bmp">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\black_wall.bmp">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\brown_wall.bmp">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\green_wall.bmp">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_3.png">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_4.jpg">
+      <Filter>리소스 파일\images</Filter>
+    </Image>
+    <Image Include="images\creature_1.bmp">
       <Filter>리소스 파일\images</Filter>
     </Image>
   </ItemGroup>
@@ -46,9 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="map.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="bot.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">

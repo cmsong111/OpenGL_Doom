@@ -12,7 +12,7 @@
 GLuint g_textureID = 1;
 int width, height;
 int channel;
-const char* imagefiles[4] = { "images/bottom.bmp" ,"images/brown_wall.bmp" ,"images/greem_wall.bmp" ,"images/black_wall.bmp" };//가져올 이미지
+const char* imagefiles[9] = { "images/bottom.bmp" ,"images/bottom2.bmp" ,"images/brown_wall.bmp" ,"images/green_wall.bmp" ,"images/black_wall.bmp", "images/creature_1.bmp","images/creature_2.bmp" ,"images/creature_3.png" ,"images/creature_4.jpg" };//가져올 이미지
 GLuint texID[4]; //텍스처 저장공간
 
 unsigned char* LoadMeshFromFile(const char* texFile) //이미지 정보 읽어오는 함수
@@ -24,7 +24,7 @@ unsigned char* LoadMeshFromFile(const char* texFile) //이미지 정보 읽어오는 함수
 		printf("ERROR : No %s. \n fail to bind %d\n", texFile, texture);
 		return (unsigned char*)false;
 	}
-	
+
 	unsigned char* image = stbi_load_from_file(fp, &width, &height, &channel, 4); //이미지 너비, 높이, 컬러채널의 수
 	fclose(fp);
 	return image;
@@ -33,79 +33,75 @@ unsigned char* LoadMeshFromFile(const char* texFile) //이미지 정보 읽어오는 함수
 // texture 설정
 void init()
 {
-	
+
 	glEnable(GL_TEXTURE_2D);
-	glGenTextures(4, texID); //(텍스처 개수, 텍스처 저장공간)
-	for (int i = 0; i < 4; i++)
+	glGenTextures(9, texID); //(텍스처 개수, 텍스처 저장공간)
+	for (int i = 0; i < 9; i++)
 	{
 		unsigned char* bitmap;
-		bitmap = LoadMeshFromFile((char*)imagefiles[i]); 
+		bitmap = LoadMeshFromFile((char*)imagefiles[i]);
 		glBindTexture(GL_TEXTURE_2D, texID[i]);
 		//gluBuild2DMipmaps(GL_TEXTURE_2D, channel, width, height, 4, GL_UNSIGNED_BYTE, bitmap);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //2D 텍스처, 확대될 때 LINEAR필터적용(픽셀이 덜 보여 매끄러운 결과 산출)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //2D 텍스처, 축소될 때 LINEAR필터적용(픽셀이 덜 보여 매끄러운 결과 산출)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmap);
-
 		free(bitmap);
 	}
 
 }
 
 void Doom_map() {
-	
-	
-		
+
+
+
 	//Bottom
-	glBindTexture(GL_TEXTURE_2D, texID[0]);
+	glBindTexture(GL_TEXTURE_2D, texID[1]);
 	glBegin(GL_POLYGON);
 	glNormal3f(0.0, 1.0, 0.0);
-	glColor3f(0.349f, 0.231f, 0.145f);
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(21.0f, 0.0f, -21.0f);
-
 	glTexCoord2d(0.0, 1.0);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
-
 	glTexCoord2d(0.0, 0.0);
 	glVertex3f(-21.0f, 0.0f, 21.0f);
-
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glEnd();
 
 	//TOPWALL
-	/*glBegin(GL_POLYGON);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(-21.0f, 6.0f, 21.0f);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, 21.0f);
-	glEnd();*/
+	glBindTexture(GL_TEXTURE_2D, texID[0]);
+	glBegin(GL_POLYGON);
+	glTexCoord2d(1.0, 1.0);
+	glVertex3f(-21.0f, 8.0f, 21.0f);
+	glTexCoord2d(0.0, 1.0);
+	glVertex3f(-21.0f, 8.0f, -21.0f);
+	glTexCoord2d(0.0, 0.0);
+	glVertex3f(21.0f, 8.0f, -21.0f);
+	glTexCoord2d(1.0, 0.0);
+	glVertex3f(21.0f, 8.0f, 21.0f);
+	glEnd();
 
 	//1Wall
 	//front
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
+	glVertex3f(-21.0f, 8.0f, -21.0f);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
 	glVertex3f(-20.5f, 0.0f, -21.0f);
-	glVertex3f(-20.5f, 6.0f, -21.0f);
+	glVertex3f(-20.5f, 8.0f, -21.0f);
 	glEnd();
 	//right
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[4]);
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-20.5f, 6.0f, 21.0f);
-
+	glVertex3f(-20.5f, 8.0f, 21.0f);
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-20.5f, 0.0f, 21.0f);
-
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(-20.5f, 0.0f, -21.0f);
-
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(-20.5f, 6.0f, -21.0f);
+	glVertex3f(-20.5f, 8.0f, -21.0f);
 	glEnd();
 
 	//bottom
@@ -120,62 +116,56 @@ void Doom_map() {
 	//back
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
-	glVertex3f(-21.0f, 6.0f, 21.0f);
+	glVertex3f(-21.0f, 8.0f, 21.0f);
 	glVertex3f(-21.0f, 0.0f, 21.0f);
 	glVertex3f(-20.5f, 0.0f, 21.0f);
-	glVertex3f(-20.5f, 6.0f, 21.0f);
+	glVertex3f(-20.5f, 8.0f, 21.0f);
 	glEnd();
 
 	//top
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.5f, 1.0f);
-	glVertex3f(-20.5f, 6.0f, 21.0f);
-	glVertex3f(-20.5f, 6.0f, -21.0f);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
-	glVertex3f(-21.0f, 6.0f, 21.0f);
+	glVertex3f(-20.5f, 8.0f, 21.0f);
+	glVertex3f(-20.5f, 8.0f, -21.0f);
+	glVertex3f(-21.0f, 8.0f, -21.0f);
+	glVertex3f(-21.0f, 8.0f, 21.0f);
 	glEnd();
 
 	//left
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-21.0f, 6.0f, 21.0f);
-
+	glVertex3f(-21.0f, 8.0f, 21.0f);
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-21.0f, 0.0f, 21.0f);
-
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
-
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
+	glVertex3f(-21.0f, 8.0f, -21.0f);
 	glEnd();
 
 	//2Wall
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[4]);
 	glBegin(GL_QUADS);
 	//front
 	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
-
+	glVertex3f(-21.0f, 8.0f, -21.0f);
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
-
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(21.0f, 0.0f, -21.0f);
-
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(21.0f, 6.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, -21.0f);
 	glEnd();
 	//right
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(21.0f, 6.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -20.5f);
-	glVertex3f(21.0f, 6.0f, -20.5f);
+	glVertex3f(21.0f, 8.0f, -20.5f);
 	glEnd();
 	//bottom
 	glBegin(GL_QUADS);
@@ -189,63 +179,56 @@ void Doom_map() {
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-21.0f, 6.0f, -20.5f);
-
+	glVertex3f(-21.0f, 8.0f, -20.5f);
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-21.0f, 0.0f, -20.5f);
-
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(21.0f, 0.0f, -20.5f);
-
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(21.0f, 6.0f, -20.5f);
+	glVertex3f(21.0f, 8.0f, -20.5f);
 	glEnd();
 	//top
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(-21.0f, 6.0f, -20.5f);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, -20.5f);
+	glVertex3f(-21.0f, 8.0f, -20.5f);
+	glVertex3f(-21.0f, 8.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, -20.5f);
 	glEnd();
 	//left
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(-21.0f, 6.0f, -21.0f);
+	glVertex3f(-21.0f, 8.0f, -21.0f);
 	glVertex3f(-21.0f, 0.0f, -21.0f);
 	glVertex3f(-21.0f, 0.0f, -20.5f);
-	glVertex3f(-21.0f, 6.0f, -20.5f);
+	glVertex3f(-21.0f, 8.0f, -20.5f);
 	glEnd();
 
 	//3Wall
 	//front
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(20.5f, 6.0f, -21.0f);
+	glVertex3f(20.5f, 8.0f, -21.0f);
 	glVertex3f(20.5f, 0.0f, -21.0f);
 	glVertex3f(21.0f, 0.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, -21.0f);
 	glEnd();
 	//right
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[3]);
 	glBegin(GL_QUADS);
 	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(1.0f, 1.0f, 0.5f);
-
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(21.0f, 6.0f, -21.0f);
-
+	glVertex3f(21.0f, 8.0f, -21.0f);
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(21.0f, 0.0f, -21.0f);
-
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(21.0f, 0.0f, 21.0f);
-
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(21.0f, 6.0f, 21.0f);
+	glVertex3f(21.0f, 8.0f, 21.0f);
 	glEnd();
 	//bottom
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[3]);
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
 
@@ -264,37 +247,37 @@ void Doom_map() {
 	//back
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(20.5f, 6.0f, 21.0f);
+	glVertex3f(20.5f, 8.0f, 21.0f);
 	glVertex3f(20.5f, 0.0f, 21.0f);
 	glVertex3f(21.0f, 0.0f, 21.0f);
-	glVertex3f(21.0f, 6.0f, 21.0f);
+	glVertex3f(21.0f, 8.0f, 21.0f);
 	glEnd();
 	//top
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(20.5f, 6.0f, 21.0f);
-	glVertex3f(20.5f, 6.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, -21.0f);
-	glVertex3f(21.0f, 6.0f, 21.0f);
+	glVertex3f(20.5f, 8.0f, 21.0f);
+	glVertex3f(20.5f, 8.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, -21.0f);
+	glVertex3f(21.0f, 8.0f, 21.0f);
 	glEnd();
 	//left
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 1.0f, 0.5f);
-	glVertex3f(20.5f, 6.0f, -21.0f);
+	glVertex3f(20.5f, 8.0f, -21.0f);
 	glVertex3f(20.5f, 0.0f, -21.0f);
 	glVertex3f(20.5f, 0.0f, -21.0f);
-	glVertex3f(20.5f, 6.0f, -21.0f);
+	glVertex3f(20.5f, 8.0f, -21.0f);
 	glEnd();
 
 
 	//4Wall
 	//front
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[2]);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0, 0.0, -1.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(21.0f, 6.0f, 20.5f);
+	glVertex3f(21.0f, 8.0f, 20.5f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(21.0f, 0.0f, 20.5f);
@@ -303,15 +286,15 @@ void Doom_map() {
 	glVertex3f(-7.0f, 0.0f, 20.5f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(-7.0f, 6.0f, 20.5f);
+	glVertex3f(-7.0f, 8.0f, 20.5f);
 	glEnd();
 	//right
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glVertex3f(21.0, 6.0f, 20.5f);
+	glVertex3f(21.0, 8.0f, 20.5f);
 	glVertex3f(21.0, 0.0f, 20.5f);
 	glVertex3f(21.0, 0.0f, 21.0f);
-	glVertex3f(21.0, 6.0f, 21.0f);
+	glVertex3f(21.0, 8.0f, 21.0f);
 	glEnd();
 	//bottom
 	glBegin(GL_QUADS);
@@ -322,12 +305,12 @@ void Doom_map() {
 	glVertex3f(21.0f, 0.0f, 21.0f);
 	glEnd();
 	//back
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[3]);
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-7.0f, 6.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, 21.0f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
@@ -336,23 +319,23 @@ void Doom_map() {
 	glVertex3f(21.0f, 0.0f, 21.0f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(21.0f, 6.0f, 21.0f);
+	glVertex3f(21.0f, 8.0f, 21.0f);
 	glEnd();
 	//top
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glVertex3f(-7.0f, 6.0f, 21.0f);
-	glVertex3f(-7.0f, 6.0f, 20.5f);
-	glVertex3f(21.0f, 6.0f, 20.5f);
-	glVertex3f(21.0f, 6.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, 20.5f);
+	glVertex3f(21.0f, 8.0f, 20.5f);
+	glVertex3f(21.0f, 8.0f, 21.0f);
 	glEnd();
 	//left
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glVertex3f(-7.0, 6.0f, 20.5f);
+	glVertex3f(-7.0, 8.0f, 20.5f);
 	glVertex3f(-7.0, 0.0f, 20.5f);
 	glVertex3f(-7.0, 0.0f, 21.0f);
-	glVertex3f(-7.0, 6.0f, 21.0f);
+	glVertex3f(-7.0, 8.0f, 21.0f);
 	glEnd();
 
 
@@ -360,22 +343,22 @@ void Doom_map() {
 	//front
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glVertex3f(-7.0f, 6.0f, -7.0f);
+	glVertex3f(-7.0f, 8.0f, -7.0f);
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, -7.0f);
-	glVertex3f(-6.5f, 6.0f, -7.0f);
+	glVertex3f(-6.5f, 8.0f, -7.0f);
 	glEnd();
 	//right
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[2]);
 	glBegin(GL_QUADS);
 	glNormal3f(1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-6.5f, 6.0f, -7.0f);
+	glVertex3f(-6.5f, 8.0f, -7.0f);
 
 	glTexCoord2d(1.0, 0.0);
-	glVertex3f(-6.5f, 6.0f, -7.0f);
+	glVertex3f(-6.5f, 8.0f, -7.0f);
 
 	glTexCoord2d(1.0, 1.0);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
@@ -383,7 +366,7 @@ void Doom_map() {
 	glTexCoord2d(0.0, 1.0);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
 	glEnd();
-	
+
 	//bottom
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
@@ -392,32 +375,32 @@ void Doom_map() {
 	glVertex3f(-6.5f, 0.0f, -7.0f);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
 	glEnd();
-	
+
 	//back
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glVertex3f(-7.0f, 6.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, 21.0f);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
 	glVertex3f(-6.5f, 0.0f, 21.0f);
-	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glVertex3f(-6.5f, 8.0f, 21.0f);
 	glEnd();
 	//top
-	
+
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
-	glVertex3f(-7.0f, 6.0f, 21.0f);
-	glVertex3f(-7.0f, 6.0f, -7.0f);
-	glVertex3f(-6.5f, 6.0f, -7.0f);
-	glVertex3f(-6.5f, 6.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, -7.0f);
+	glVertex3f(-6.5f, 8.0f, -7.0f);
+	glVertex3f(-6.5f, 8.0f, 21.0f);
 	glEnd();
 	//left
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[4]);
 	glBegin(GL_QUADS);
 	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-7.0f, 6.0f, 21.0f);
+	glVertex3f(-7.0f, 8.0f, 21.0f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-7.0f, 0.0f, 21.0f);
@@ -426,18 +409,18 @@ void Doom_map() {
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(-7.0f, 6.0f, -7.0f);
+	glVertex3f(-7.0f, 8.0f, -7.0f);
 	glEnd();
 
 	//6Wall
 	//front
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[4]);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0, 0.0, -1.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-7.0f, 6.0f, -7.0f);
+	glVertex3f(-7.0f, 8.0f, -7.0f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-7.0f, 0.0f, -7.0f);
@@ -446,17 +429,17 @@ void Doom_map() {
 	glVertex3f(7.0f, 0.0f, -7.0f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(7.0f, 6.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -7.0f);
 	glEnd();
 	//right
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
-	glVertex3f(7.0f, 6.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -6.5f);
-	glVertex3f(7.0f, 6.0f, -6.5f);
+	glVertex3f(7.0f, 8.0f, -6.5f);
 	glEnd();
-	
+
 	//bottom
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
@@ -465,15 +448,15 @@ void Doom_map() {
 	glVertex3f(7.0f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -6.5f);
 	glEnd();
-	
+
 	//back
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[2]);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0, 0.0, 1.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-7.0f, 6.0f, -6.5f);
+	glVertex3f(-7.0f, 8.0f, -6.5f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(-7.0f, 0.0f, -6.5f);
@@ -482,42 +465,42 @@ void Doom_map() {
 	glVertex3f(7.0f, 0.0f, -6.5f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(7.0f, 6.0f, -6.5f);
+	glVertex3f(7.0f, 8.0f, -6.5f);
 	glEnd();
 	//top
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
-	glVertex3f(-7.0f, 6.0f, -6.5f);
-	glVertex3f(-7.0f, 6.0f, -7.0f);
-	glVertex3f(7.0f, 6.0f, -7.0f);
-	glVertex3f(7.0f, 6.0f, -6.5f);
+	glVertex3f(-7.0f, 8.0f, -6.5f);
+	glVertex3f(-7.0f, 8.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -6.5f);
 	glEnd();
 	//left
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 1.0f, 0.5f);
-	glVertex3f(-7.0f, 6.0f, -7.0f);
+	glVertex3f(-7.0f, 8.0f, -7.0f);
 	glVertex3f(-7.0f, 0.0f, -7.0f);
 	glVertex3f(-7.0f, 0.0f, -6.5f);
-	glVertex3f(-7.0f, 6.0f, -6.5f);
+	glVertex3f(-7.0f, 8.0f, -6.5f);
 	glEnd();
 
 	//7Wall
 	//front
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
-	glVertex3f(6.5f, 6.0f, -7.0f);
+	glVertex3f(6.5f, 8.0f, -7.0f);
 	glVertex3f(6.5f, 0.0f, -7.0f);
 	glVertex3f(7.0f, 0.0f, -7.0f);
-	glVertex3f(7.0f, 6.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -7.0f);
 	glEnd();
 	//right
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[3]);
 	glBegin(GL_QUADS);
 	glNormal3f(1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(7.0f, 6.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -7.0f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(7.0f, 0.0f, -7.0f);
@@ -526,11 +509,11 @@ void Doom_map() {
 	glVertex3f(7.0f, 0.0f, 7.0f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(7.0f, 6.0f, 7.0f);
+	glVertex3f(7.0f, 8.0f, 7.0f);
 	glEnd();
-	
+
 	//bottom
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[3]);
 	glBegin(GL_QUADS);
 	glNormal3f(-1.0, 0.0, 0.0);
 	glColor3f(0.349f, 0.231f, 0.145f);
@@ -547,14 +530,14 @@ void Doom_map() {
 	glTexCoord2d(0.0, 1.0);
 	glVertex3f(7.0f, 0.0f, 7.0f);
 	glEnd();
-	
+
 	//back
-	glBindTexture(GL_TEXTURE_2D, texID[1]);
+	glBindTexture(GL_TEXTURE_2D, texID[3]);
 	glBegin(GL_QUADS);
 	glColor3f(0.349f, 0.231f, 0.145f);
 
 	glTexCoord2d(0.0, 0.0);
-	glVertex3f(6.5f, 6.0f, 7.0f);
+	glVertex3f(6.5f, 8.0f, 7.0f);
 
 	glTexCoord2d(1.0, 0.0);
 	glVertex3f(6.5f, 0.0f, 7.0f);
@@ -563,26 +546,30 @@ void Doom_map() {
 	glVertex3f(7.0f, 0.0f, 7.0f);
 
 	glTexCoord2d(0.0, 1.0);
-	glVertex3f(7.0f, 6.0f, 7.0f);
+	glVertex3f(7.0f, 8.0f, 7.0f);
 	glEnd();
 	//top
 	glBegin(GL_QUADS);
 	glColor3f(0.8f, 0.0f, 0.5f);
-	glVertex3f(6.5f, 6.0f, 7.0f);
-	glVertex3f(6.5f, 6.0f, -7.0f);
-	glVertex3f(7.0f, 6.0f, -7.0f);
-	glVertex3f(7.0f, 6.0f, 7.0f);
+	glVertex3f(6.5f, 8.0f, 7.0f);
+	glVertex3f(6.5f, 8.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, -7.0f);
+	glVertex3f(7.0f, 8.0f, 7.0f);
 	glEnd();
 	glEnable(GL_LIGHTING);
-	
+
 	//left
-	/*glBegin(GL_QUADS);
-	glColor3f(0.8f, 0.0f, 0.5f);
-	glVertex3f(-6.5f, 6.0f, 7.0f);
-	glVertex3f(-6.5f, 0.0f, 7.0f);
+	glBegin(GL_QUADS);
+	glBindTexture(GL_TEXTURE_2D, texID[2]);
+	glTexCoord2d(0.0, 0.0);
+	glVertex3f(6.5f, 8.0f, 7.0f);
+	glTexCoord2d(1.0, 0.0);
 	glVertex3f(6.5f, 0.0f, 7.0f);
-	glVertex3f(6.5f, 6.0f, 7.0f);
-	glEnd();*/
+	glTexCoord2d(1.0, 1.0);
+	glVertex3f(6.5f, 0.0f, 7.0f);
+	glTexCoord2d(0.0, 1.0);
+	glVertex3f(6.5f, 8.0f, 7.0f);
+	glEnd();
 
 	//TEMP Charactor
 	glColor3f(1.0f, 1.0f, 0.0f);
@@ -590,6 +577,24 @@ void Doom_map() {
 	glutWireTeapot(0.5);
 
 
-	
+
 }
 
+
+void makebot(float angle, float Xsize, float Ysize, float X, float Y, int what) {
+	glPushMatrix();
+	glTranslatef(X, 0.0, Y);
+	glRotatef(angle, 0.0, 1.0, 0.0);
+	glBindTexture(GL_TEXTURE_2D, texID[what]);
+	glBegin(GL_POLYGON);
+	glTexCoord2d(1.0, 1.0);
+	glVertex3f(-Xsize, Ysize, 0.0f);
+	glTexCoord2d(1.0, 0.0);
+	glVertex3f(-Xsize, 0.0f, 0.0f);
+	glTexCoord2d(0.0, 0.0);
+	glVertex3f(Xsize, 0.0f, 0.0f);
+	glTexCoord2d(0.0, 1.0);
+	glVertex3f(Xsize, Ysize, 0.0f);
+	glEnd();
+	glPopMatrix();
+}

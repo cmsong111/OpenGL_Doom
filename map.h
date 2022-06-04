@@ -5,6 +5,6 @@
 
 void Doom_map();
 void loadTexture();
-
+void makebot(float angle, float Xsize, float Ysize, float X, float Y, int what);
 
 #endif
