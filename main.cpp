@@ -41,7 +41,6 @@ GLfloat angle = 0;
 
 //함수 원형 선언
 void JumpTimer(int value);
-void init();
 
 
 void FpsView(GLfloat yaw, GLfloat pitch) {
@@ -215,7 +214,6 @@ int main(int argc, char** argv) {
 	glutCreateWindow("Doom");
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
-	MyLightInit();
 	glutDisplayFunc(MyDisplay);
 	glutReshapeFunc(MyReshape);
 	glutKeyboardFunc(MyKeyBoard);

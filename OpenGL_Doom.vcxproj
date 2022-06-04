@@ -153,8 +153,8 @@
     <Image Include="images\bottom.bmp" />
     <Image Include="images\bottom.jpg" />
     <Image Include="images\brown_wall.jpg" />
-    <Image Include="images\creature_1.png" />
-    <Image Include="images\creature_2.png" />
+    <Image Include="images\creature_1.bmp" />
+    <Image Include="images\creature_2.bmp" />
     <Image Include="images\creature_3.png" />
     <Image Include="images\creature_4.jpg" />
     <Image Include="images\green_wall.jpg" />
