@@ -30,10 +30,12 @@ GLdouble sitdown = 4.0;
 GLfloat yawX, pitchY; //카메라 y축, x축 기준  회전각 변화량
 GLfloat CurrentX = 0.0f, CurrentY = 0.0f; //현재 마우스 좌표
 GLfloat moveX = 0.0f, moveZ = 0.0f; // X,Z축 시점 이동변화량
-GLfloat mX = 0.0f, mZ = 0.0f; // X,Z축 총 이동량q
+GLfloat mX = 0.0f, mZ = 0.0f; // X,Z축 총 이동량
 GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
-int bullet = 20;
+
+int bullet = 20, health = 100;
 float angle = 0;
+int botstate[4] = { 1,1,1,1 }; // 1번 살아있음 0번 죽음
 
 //함수 원형 선언
 void JumpTimer(int value);
@@ -52,10 +54,14 @@ void MyDisplay() {
 	FpsView(rotX, rotY);
 	glTranslated(mX, 0, mZ);
 	Doom_map();
-	makebot(angle, 2, 4, -5.5, 19, 5);
-	makebot(angle, 1, 5, 19, 0, 6);
-	makebot(angle, 1, 5, -19, -19, 7);
-	makebot(angle, 2.5, 4, 19, 19, 8);
+	if(botstate[0])
+		makebot(angle, 2, 4, -5.5, 19, 5);
+	if (botstate[1])
+		makebot(angle, 1, 5, 19, 0, 6);
+	if (botstate[2])
+		makebot(angle, 1, 5, -19, -19, 7);
+	if (botstate[3])
+		makebot(angle, 2.5, 4, 19, 19, 8);
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -71,7 +77,6 @@ void MyReshape(int NW, int NH) {
 }
 
 void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
-	printf("%d\n", KeyPressed);
 	double movespeed = 0.1;
 	switch (KeyPressed)
 	{
@@ -105,7 +110,6 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 		break;
 
 	case 'r':
-		printf("GUN_RELOAD\n");
 		PlaySound(TEXT(SOUND_FILE_GUN_RELOAD), NULL, SND_ASYNC);
 		bullet = 20;
 		break;
@@ -120,7 +124,6 @@ void MyKeyBoard(unsigned char KeyPressed, int X, int Y) {
 }
 
 void MySpecial(int key, int X, int Y) {
-	printf("%d", key);
 	if (key == 114) {
 		if (sitdown == 4) {
 			sitdown = 2;
@@ -135,15 +138,25 @@ void MySpecial(int key, int X, int Y) {
 void MyMouseClick(GLint Button, GLint State, GLint X, GLint Y) {
 	if (Button == GLUT_LEFT_BUTTON && State == GLUT_DOWN) {
 		if (bullet >= 0) {
-			printf("GUN_FIRE\n");
 			PlaySound(TEXT(SOUND_FILE_GUN_FIRE), NULL, SND_ASYNC);
 			bullet--;
+			if (0 < mX && mX < 6 && -13 > mZ && mZ > -17) {
+				botstate[0] = 0;
+			}
+			if (-11 > mX && mX > -20 && -16 > mZ && mZ > -20) {
+				botstate[3] = 0;
+			}
+			if (10 < mX && mX < 20 && 16 < mZ && mZ < 20) {
+				botstate[2] = 0;
+			}
+			if (-19 < mX && mX < 15 && -4 < mZ && mZ < 2) {
+				botstate[1] = 0;
+			}
 		}
 		if (bullet < 0) {
-			printf("bullet out\n");
 			PlaySound(TEXT(SOUND_FILE_GUN_NON), NULL, SND_ASYNC);
 		}
-		
+
 	}
 }
 
@@ -153,7 +166,6 @@ void MyMouseMove(GLint X, GLint Y) {
 
 //마우스로 시점 변환시 사용
 void MyMousePassiveMove(GLint X, GLint Y) {
-	printf("%i, %i\n", X, Y);
 	yawX = X - CurrentX;
 	//pitchY = Y-CurrentY;
 	rotX += yawX * 0.7;
@@ -164,9 +176,7 @@ void MyMousePassiveMove(GLint X, GLint Y) {
 	glutPostRedisplay();
 }
 
-void MyIdle() {
 
-}
 
 void AngleTimer(int Value) {
 	angle = rand() % 360;
@@ -174,16 +184,39 @@ void AngleTimer(int Value) {
 	glutTimerFunc(1600, AngleTimer, 1);
 }
 
+void statusTimer(int Value) {
+
+	system("cls");
+	printf("====Key Manual====\n");
+	printf("move key = wasd\tangle = mouse move\n");
+	printf("sitdown : ctrl\tjump : spacebar\n");
+	printf("shot gun : mouse left click\treload : r\n");
+	printf("\n====Status====\n");
+	printf("bullet : %d\n", bullet);
+
+	if (bullet < 0) {
+		printf("\n====Warning====\n");
+		printf("You need reload\n");
+	}
+
+	printf("\n====Timer====\n");
+	printf("%d min %d sec", Value / 1000 / 60, Value / 1000);
+
+	printf("\n====== loacte ======\n");
+	printf("x = %f, z = %f\n", mX, mZ);
+
+	glutTimerFunc(500, statusTimer, Value + 500);
+}
+
 void MenuProc(int entryID) {
 
 }
 
 void MenuFunc() {
-	
+
 }
 
 void JumpTimer(int value) {
-	printf("점프 실행중, value = %d\n", value);
 	if (value == 1 && sitdown <= 5.4) {
 		sitdown += 0.1;
 		glutTimerFunc(10, JumpTimer, 1);
@@ -194,7 +227,7 @@ void JumpTimer(int value) {
 	else if (value == -1 && sitdown >= 4) {
 		sitdown -= 0.1;
 		glutTimerFunc(10, JumpTimer, -1);
-	}	
+	}
 	glutPostRedisplay();
 }
 
@@ -241,8 +274,8 @@ void flashlight2() {
 }
 void InitIight() {
 	GLfloat Global_ambient_Color[] = { 1.0,0.8,0.8,1.0 };
-	GLfloat Light0_pos[] = { 0.0,5.9,0.0,1.0};
-	GLfloat Light0_ambient[] = {0.2, 0.2, 0.2, 1.0};
+	GLfloat Light0_pos[] = { 0.0,5.9,0.0,1.0 };
+	GLfloat Light0_ambient[] = { 0.2, 0.2, 0.2, 1.0 };
 	GLfloat Light0_diffuse[] = { 0.7, 0.1, 0.1, 1.0 };
 	GLfloat Light0_specular[] = { 1.0, 0.2, 0.2, 1.0 };
 
@@ -260,13 +293,13 @@ void InitIight() {
 	glEnable(GL_LIGHT0);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Global_ambient_Color);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-	
-	
+
+
 }
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGBA |GLUT_DEPTH| GLUT_DOUBLE);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
 	glutInitWindowSize(1600, 900);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Doom");
@@ -281,8 +314,8 @@ int main(int argc, char** argv) {
 	glutMouseFunc(MyMouseClick);
 	//glutMotionFunc(MyMouseMove);
 	glutPassiveMotionFunc(MyMousePassiveMove);
-	//glutIdleFunc(MyIdle);
 	glutTimerFunc(1600, AngleTimer, 1);
+	glutTimerFunc(500, statusTimer, 0);
 	//MenuFunc();
 
 	glutMainLoop();
