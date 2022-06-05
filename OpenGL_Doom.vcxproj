@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mylights.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="map.h" />
+    <ClInclude Include="mylights.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,10 +161,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\sounds\Gun_Fire.ogg" />
+    <None Include="sounds\track1.m4a" />
+    <None Include="sounds\track2.m4a" />
+    <None Include="sounds\track3.m4a" />
+    <None Include="sounds\track4.m4a" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="sounds\Gun_nonbullet.wav" />
     <Media Include="sounds\Gun_reload.wav" />
+    <Media Include="sounds\Main_audio.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

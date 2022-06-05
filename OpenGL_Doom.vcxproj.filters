@@ -27,6 +27,9 @@
     <ClCompile Include="map.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="mylights.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bottom.jpg">
@@ -61,6 +64,18 @@
     <None Include="..\sounds\Gun_Fire.ogg">
       <Filter>리소스 파일\sounds</Filter>
     </None>
+    <None Include="sounds\track4.m4a">
+      <Filter>리소스 파일\sounds</Filter>
+    </None>
+    <None Include="sounds\track1.m4a">
+      <Filter>리소스 파일\sounds</Filter>
+    </None>
+    <None Include="sounds\track2.m4a">
+      <Filter>리소스 파일\sounds</Filter>
+    </None>
+    <None Include="sounds\track3.m4a">
+      <Filter>리소스 파일\sounds</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="map.h">
@@ -69,12 +84,18 @@
     <ClInclude Include="stb_image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="mylights.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Media Include="sounds\Gun_nonbullet.wav">
       <Filter>리소스 파일\sounds</Filter>
     </Media>
     <Media Include="sounds\Gun_reload.wav">
+      <Filter>리소스 파일\sounds</Filter>
+    </Media>
+    <Media Include="sounds\Main_audio.wav">
       <Filter>리소스 파일\sounds</Filter>
     </Media>
   </ItemGroup>
