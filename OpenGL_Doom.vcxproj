@@ -157,6 +157,7 @@
     <Image Include="images\creature_2.bmp" />
     <Image Include="images\creature_3.png" />
     <Image Include="images\creature_4.jpg" />
+    <Image Include="images\gameover.bmp" />
     <Image Include="images\green_wall.bmp" />
   </ItemGroup>
   <ItemGroup>
