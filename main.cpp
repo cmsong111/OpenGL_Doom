@@ -29,17 +29,20 @@
 #define SOUND_FILE_TRACK4 "sounds/track4.wav"
 
 #define PI 3.1415
+GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
+
 
 GLdouble sitdown = 4.0;
 GLfloat yawX, pitchY; //카메라 y축, x축 기준  회전각 변화량
 GLfloat CurrentX = 0.0f, CurrentY = 0.0f; //현재 마우스 좌표
 GLfloat moveX = 0.0f, moveZ = 0.0f; // X,Z축 시점 이동변화량
 GLfloat mX = 0.0f, mZ = 0.0f; // X,Z축 총 이동량
-GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
+
 
 int bullet = 20, health = 100;
 float angle = 0;
 int botstate[4] = { 1,1,1,1 }; // 1번 살아있음 0번 죽음
+int gamestate = 0; //0이면 게임중 1이면 게임 종료
 
 //함수 원형 선언
 void JumpTimer(int value);
@@ -55,6 +58,14 @@ void FpsView(GLfloat yaw, GLfloat pitch) {
 
 void MyDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	if (gamestate == 1) {
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
+
+	}
 	glPushMatrix();
 	FpsView(rotX, rotY);
 	glTranslated(mX, 0, mZ);
@@ -67,6 +78,11 @@ void MyDisplay() {
 		makebot(angle, 1, 5, -19, -19, 7);
 	if (botstate[3])
 		makebot(angle, 2.5, 4, 19, 19, 8);
+
+	if (gamestate == 1) {
+		Doom_gameover();
+		glEnable(GL_LIGHTING);
+	}
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -204,6 +220,10 @@ void Sound(int Value) {
 
 void statusTimer(int Value) {
 
+	if (14 <= mX && mX <= 21 && mZ < -21) {
+		gamestate = 1;
+	}
+
 	system("cls");
 	printf("====Key Manual====\n");
 	printf("move key = wasd\n");
@@ -222,6 +242,8 @@ void statusTimer(int Value) {
 	}
 	printf("\n====Timer====\n");
 	printf("%d min %d sec", Value / 1000 / 60, Value / 1000 % 60);
+
+	printf("\n %f, %f,\n", mX, mZ);
 
 	glutTimerFunc(500, statusTimer, Value + 500);
 }

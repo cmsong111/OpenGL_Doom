@@ -12,7 +12,7 @@
 GLuint g_textureID = 1;
 int width, height;
 int channel;
-const char* imagefiles[9] = { "images/bottom.bmp" ,"images/bottom2.bmp" ,"images/brown_wall.bmp" ,"images/green_wall.bmp" ,"images/black_wall.bmp", "images/creature_1.bmp","images/creature_2.bmp" ,"images/creature_3.png" ,"images/creature_4.jpg" };//가져올 이미지
+const char* imagefiles[10] = { "images/bottom.bmp" ,"images/bottom2.bmp" ,"images/brown_wall.bmp" ,"images/green_wall.bmp" ,"images/black_wall.bmp", "images/creature_1.bmp","images/creature_2.bmp" ,"images/creature_3.png" ,"images/creature_4.jpg","images/gameover.bmp" };//가져올 이미지
 GLuint texID[9]; //텍스처 저장공간
 
 unsigned char* LoadMeshFromFile(const char* texFile) //이미지 정보 읽어오는 함수
@@ -35,8 +35,8 @@ void init()
 {
 
 	glEnable(GL_TEXTURE_2D);
-	glGenTextures(9, texID); //(텍스처 개수, 텍스처 저장공간)
-	for (int i = 0; i < 9; i++)
+	glGenTextures(10, texID); //(텍스처 개수, 텍스처 저장공간)
+	for (int i = 0; i < 10; i++)
 	{
 		unsigned char* bitmap;
 		bitmap = LoadMeshFromFile((char*)imagefiles[i]);
@@ -553,20 +553,41 @@ void Doom_map() {
 }
 
 
+
+
+
 void makebot(float angle, float Xsize, float Ysize, float X, float Y, int what) {
 	glPushMatrix();
 	glTranslatef(X, 0.0, Y);
 	glRotatef(angle, 0.0, 1.0, 0.0);
 	glBindTexture(GL_TEXTURE_2D, texID[what]);
 	glBegin(GL_POLYGON);
-	glTexCoord2d(0.0, 0.0);
-	glVertex3f(-Xsize, Ysize, 0.0f);
 	glTexCoord2d(0.0, 1.0);
+	glVertex3f(-Xsize, Ysize, 0.0f);
+	glTexCoord2d(0.0, 0.0);
 	glVertex3f(-Xsize, 0.0f, 0.0f);
-	glTexCoord2d(1.0, 1.0);
-	glVertex3f(Xsize, 0.0f, 0.0f);
 	glTexCoord2d(1.0, 0.0);
+	glVertex3f(Xsize, 0.0f, 0.0f);
+	glTexCoord2d(1.0, 1.0);
 	glVertex3f(Xsize, Ysize, 0.0f);
 	glEnd();
 	glPopMatrix();
+}
+
+void Doom_gameover() {
+	//gameover
+	glBindTexture(GL_TEXTURE_2D, texID[9]);
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0, 0.0, 1.0);
+	glColor3f(1.0, 1.0, 1.0);
+	glTexCoord2d(1.0, 1.0);
+	glVertex3f(-21.0f, 8.0f, 35.0f);
+	glTexCoord2d(1.0, 0.0);
+	glVertex3f(-21.0f, 0.0f, 35.0f);
+	glTexCoord2d(0.0, 0.0);
+	glVertex3f(-7.0f, 0.0f, 35.0f);
+	glTexCoord2d(0.0, 1.0);
+	glVertex3f(-7.0f, 8.0f, 35.0f);
+	glEnd();
+	return;
 }
