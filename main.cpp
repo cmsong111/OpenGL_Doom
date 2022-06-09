@@ -1,4 +1,3 @@
-//Windows
 #include <windows.h>
 #include <time.h>
 #include <stdio.h>
@@ -29,9 +28,8 @@
 #define SOUND_FILE_TRACK4 "sounds/track4.wav"
 
 #define PI 3.1415
-GLfloat rotX = 0.0f, rotY = 0.0f; //FpsView func 전달인자, 총 회전각
 
-
+GLfloat rotX = 0.0f; //FpsView func 전달인자, 총 회전각
 GLdouble sitdown = 4.0;
 GLfloat yawX, pitchY; //카메라 y축, x축 기준  회전각 변화량
 GLfloat CurrentX = 0.0f, CurrentY = 0.0f; //현재 마우스 좌표
@@ -50,10 +48,9 @@ void init();
 void flashlight1();
 
 
-void FpsView(GLfloat yaw, GLfloat pitch) {
+void FpsView(GLfloat yaw) {
 	gluLookAt(0, sitdown, 0, 0, sitdown, -1, 0, 1, 0);
 	glRotatef(yaw, 0.0, 1.0, 0.0);
-	glRotatef(pitch, 1.0, 0.0, 0.0);
 }
 
 void MyDisplay() {
@@ -64,12 +61,12 @@ void MyDisplay() {
 		glDisable(GL_LIGHT0);
 		glDisable(GL_LIGHT1);
 		glDisable(GL_LIGHT2);
-
 	}
 	glPushMatrix();
-	FpsView(rotX, rotY);
+	FpsView(rotX);
 	glTranslated(mX, 0, mZ);
 	Doom_map();
+
 	if (botstate[0])
 		makebot(angle, 2, 4, -5.5, 19, 5);
 	if (botstate[1])
@@ -88,7 +85,6 @@ void MyDisplay() {
 }
 
 void MyReshape(int NW, int NH) {
-
 	glViewport(0, 0, NW, NH);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -170,24 +166,20 @@ void MyMouseClick(GLint Button, GLint State, GLint X, GLint Y) {
 			if (10 < mX && mX < 20 && 16 < mZ && mZ < 20) {
 				botstate[2] = 0;
 			}
-			if (-19 < mX && mX < 15 && -4 < mZ && mZ < 2) {
+			if (-19 < mX && mX < -15 && -4 < mZ && mZ < 2) {
 				botstate[1] = 0;
 			}
 		}
 		if (bullet < 0) {
 			PlaySound(TEXT(SOUND_FILE_GUN_NON), NULL, SND_ASYNC);
 		}
-
 	}
 }
 
 void MyMousePassiveMove(GLint X, GLint Y) {  //마우스로 시점 변환시 사용
 	yawX = X - CurrentX;
-	//pitchY = Y-CurrentY;
 	rotX += yawX * 0.7;
-	//rotY += pitchY * 0.5;
 	CurrentX = X;
-	//CurrentY = Y;
 
 	glutPostRedisplay();
 }
@@ -211,16 +203,16 @@ void Sound(int Value) {
 		if (botstate[2] == 1)
 			PlaySound(TEXT(SOUND_FILE_TRACK3), NULL, SND_ASYNC);
 	}
-	if (-19 < mX && mX < 15 && -4 < mZ && mZ < 2) {
+	if (-19 < mX && mX < -15 && -4 < mZ && mZ < 2) {
 		if (botstate[1] == 1)
 			PlaySound(TEXT(SOUND_FILE_TRACK4), NULL, SND_ASYNC);
 	}
-	glutTimerFunc(10000, Sound, 1);
+	glutTimerFunc(5000, Sound, 1);
 }
 
 void statusTimer(int Value) {
 
-	if (14 <= mX && mX <= 21 && mZ < -21) {
+	if (7 <= mX && mX <= 21 && mZ < -21) {
 		gamestate = 1;
 	}
 
@@ -240,12 +232,11 @@ void statusTimer(int Value) {
 		printf("\n====Warning====\n");
 		printf("You need reload\n");
 	}
+
 	printf("\n====Timer====\n");
 	printf("%d min %d sec", Value / 1000 / 60, Value / 1000 % 60);
-
-	printf("\n %f, %f,\n", mX, mZ);
-
-	glutTimerFunc(500, statusTimer, Value + 500);
+	if(gamestate == 0)
+		glutTimerFunc(500, statusTimer, Value + 500);
 }
 
 void JumpTimer(int value) {
@@ -283,7 +274,7 @@ int main(int argc, char** argv) {
 
 	glutTimerFunc(1600, AngleTimer, 1);
 	glutTimerFunc(500, statusTimer, 0);
-	glutTimerFunc(10000, Sound, 1);
+	glutTimerFunc(5000, Sound, 1);
 
 	glutMainLoop();
 	return 0;
