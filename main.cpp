@@ -237,14 +237,26 @@ void statusTimer(int Value) {
 	printf("%d min %d sec", Value / 1000 / 60, Value / 1000 % 60);
 	if(gamestate == 0)
 		glutTimerFunc(500, statusTimer, Value + 500);
+	else {
+		system("cls");
+		printf("====Key Manual====\n");
+		printf("move key = wasd\n");
+		printf("angle = mouse move\n");
+		printf("sitdown : ctrl\n");
+		printf("jump : spacebar\n");
+		printf("shot gun : mouse left click\n");
+		printf("reload : r\n");
+		printf("\n\n%d min %d sec\n", Value / 1000 / 60, Value / 1000 % 60);
+		printf("congratulation!!\nYou have completed the game.");
+	}
 }
 
 void JumpTimer(int value) {
-	if (value == 1 && sitdown <= 5.4) {
+	if (value == 1 && sitdown <= 6) {
 		sitdown += 0.1;
 		glutTimerFunc(10, JumpTimer, 1);
 	}
-	else if (value == 1 && sitdown >= 5.4) {
+	else if (value == 1 && sitdown >= 6) {
 		glutTimerFunc(10, JumpTimer, -1);
 	}
 	else if (value == -1 && sitdown >= 4) {
